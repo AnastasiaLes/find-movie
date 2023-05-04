@@ -15,7 +15,6 @@ export const SingleMovieScreen = ({route, navigation}) => {
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      console.log(json);
       setMovie(json);
     } catch (error) {
       console.error(error);
