@@ -2,28 +2,22 @@ import React, {useEffect, useState} from 'react';
 import {FlatList, RefreshControl, TouchableOpacity, View} from 'react-native';
 import {Movie} from '../MovieCard/MovieCard';
 import {Loader} from '../Loading/Loading';
+import {API_KEY, BASE_URL, SEARCH_URL} from '../constants';
+import {SearchText, MovieType} from '../types';
 
-type Movie = {
-  id: string;
-  title: string;
-  releaseYear: string;
-  poster_path: string;
-  release_date: string;
-  overview: string;
-};
-const API_KEY = '92e9d2ddc265e58dd6d39fa8f044cca9';
-export const MovieList = searchText => {
+export const MovieList = (searchText: SearchText) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [moviesList, setMoviesList] = useState<Movie[]>([]);
+  const [moviesList, setMoviesList] = useState<MovieType[]>([]);
 
   const query = searchText.searchText;
-  const URL = `https://api.themoviedb.org/3/trending/movie/day?api_key=${API_KEY}`;
-  const URLSEARCH = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+  const URL =
+    query.length < 2
+      ? `${BASE_URL}?api_key=${API_KEY}`
+      : `${SEARCH_URL}?api_key=${API_KEY}&query=${query}`;
   const getMovies = async () => {
     setIsLoading(true);
     try {
-      const response =
-        query.length < 1 ? await fetch(URL) : await fetch(URLSEARCH);
+      const response = await fetch(URL);
       const json = await response.json();
       setMoviesList(json.results);
     } catch (error) {
@@ -34,6 +28,7 @@ export const MovieList = searchText => {
   };
   useEffect(() => {
     getMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
 
   if (isLoading) {
