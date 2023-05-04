@@ -15,11 +15,11 @@ export const Navigation = () => {
           component={HomeScreen}
           options={{title: 'Movies'}}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name="SingleMovie"
           component={SingleMovieScreen}
           options={{title: 'Movie'}}
-        /> */}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

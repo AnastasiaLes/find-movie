@@ -5,7 +5,7 @@ import {Loader} from '../Components/Loading/Loading';
 import {API_KEY, BASE_URL} from '../Components/constants';
 import {MovieType} from '../Components/types';
 
-export const SingleMovieScreen = (movie_id: number) => {
+export const SingleMovieScreen = () => {
   const URL = `${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`;
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [movie, setMovie] = useState<MovieType>();
