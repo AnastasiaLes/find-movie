@@ -5,16 +5,18 @@ import {Loader} from '../Components/Loading/Loading';
 import {API_KEY, BASE_URL} from '../Components/constants';
 import {MovieType} from '../Components/types';
 
-export const SingleMovieScreen = () => {
-  const URL = `${BASE_URL}/movie/${movie_id}?api_key=${API_KEY}`;
+export const SingleMovieScreen = ({route, navigation}) => {
+  const {id, title} = route.params;
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [movie, setMovie] = useState<MovieType>();
+  const URL = `${BASE_URL}/movie/${id}?api_key=${API_KEY}&elanguage=en-US`;
   const getMovie = async () => {
     setIsLoading(true);
     try {
       const response = await fetch(URL);
       const json = await response.json();
-      setMovie(json.results);
+      console.log(json);
+      setMovie(json);
     } catch (error) {
       console.error(error);
     } finally {
@@ -22,8 +24,10 @@ export const SingleMovieScreen = () => {
     }
   };
   useEffect(() => {
+    navigation.setOptions({
+      title,
+    });
     getMovie();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {

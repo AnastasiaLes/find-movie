@@ -19,12 +19,12 @@ export const MovieDesc = styled(Text)`
 
 export const SearchContainer = styled(View)`
   height: 50px;
-  background-color: #f3f3f3;
+  background-color: #fff;
   border-radius: 15px;
   margin: 10px;
 `;
 
-export const SeatchInput = styled(TextInput)`
+export const SearchInput = styled(TextInput)`
   justify-content: center;
   width: 100%;
   height: 100%;
