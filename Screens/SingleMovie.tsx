@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {MovieDesc, MovieImg, SingleMovieContainer} from './styles';
 import {Loader} from '../Components/Loading/Loading';
 import {API_KEY, BASE_URL} from '../Components/constants';
@@ -42,6 +42,7 @@ export const SingleMovieScreen = ({route, navigation}) => {
             }}
           />
           <MovieDesc>{movie.overview}</MovieDesc>
+          <Text>Release Date: {movie.release_date}</Text>
         </View>
       )}
     </SingleMovieContainer>
